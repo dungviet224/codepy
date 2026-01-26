@@ -1,0 +1,211 @@
+\documentclass[11pt, a4paper]{article}
+
+% --- UNIVERSAL PREAMBLE BLOCK ---
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{fontspec}
+
+\usepackage[vietnamese, provide=*]{babel}
+
+\babelprovide[import]{vietnamese}
+\babelprovide[import]{english}
+
+% Set default/Latin font to Sans Serif in the main (rm) slot
+\babelfont{rm}{Noto Sans}
+
+% Add because main language is not English
+\usepackage{enumitem}
+\setlist[itemize]{label=-}
+
+% --- PACKAGES ---
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{array}
+
+% --- PAGE SETUP ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{Trang \thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+
+% --- CUSTOM COMMANDS ---
+\newcommand{\bai}[2]{\vspace{0.5cm}\noindent\textbf{Bài #1: #2}}
+\newcommand{\iobox}[2]{
+    \begin{center}
+    \begin{tabularx}{0.8\textwidth}{|X|X|}
+    \hline
+    \textbf{Input} & \textbf{Output} \\
+    \hline
+    \vtop{#1} & \vtop{#2} \\
+    \hline
+    \end{tabularx}
+    \end{center}
+}
+
+\begin{document}
+
+% --- HEADER ---
+\begin{center}
+    \begin{tabular}{>{\centering\arraybackslash}p{0.4\textwidth} >{\centering\arraybackslash}p{0.5\textwidth}}
+        SỞ GIÁO DỤC VÀ ĐÀO TẠO & \textbf{KỲ THI CHỌN HỌC SINH GIỎI CẤP TỈNH} \\
+        LẠNG SƠN & \textbf{LỚP 11 THPT NĂM HỌC 2025 - 2026} \\
+        \textbf{ĐỀ THI CHÍNH THỨC} & Môn thi: \textbf{TIN HỌC (ĐẠI TRÀ)} \\
+        (Đề thi có 02 trang) & Ngày thi: \textbf{01/02/2026} \\
+         & Thời gian làm bài: \textbf{180 phút} (không kể thời gian giao đề)
+    \end{tabular}
+\end{center}
+\hrule
+\vspace{0.5cm}
+
+\textbf{Tổng quan đề thi (Ngày 3):}
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Câu} & \textbf{Tên bài} & \textbf{File bài làm} & \textbf{Điểm} \\ \hline
+1 & Số Phong Phú & RICHNUM.CPP / .PY & 5.0 \\ \hline
+2 & Nén Xâu Ký Tự & STRZIP.CPP / .PY & 6.0 \\ \hline
+3 & Vùng Ảnh Liên Thông & IMAGE.CPP / .PY & 6.0 \\ \hline
+4 & Chọn Quà Lưu Niệm & GIFT.CPP / .PY & 3.0 \\ \hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+% --- BÀI 1 ---
+\bai{1}{Số Phong Phú (5.0 điểm)}
+
+Trong số học, một số nguyên dương $X$ được gọi là \textbf{Số phong phú} (Abundant Number) nếu tổng các ước số thực sự của nó (các ước số nhỏ hơn chính nó) lớn hơn nó.
+Ví dụ: Số 12 có các ước thực sự là 1, 2, 3, 4, 6. Tổng là $1+2+3+4+6 = 16$. Vì $16 > 12$ nên 12 là số phong phú.
+
+\textbf{Yêu cầu:} Cho dãy số nguyên dương $A$ gồm $N$ phần tử. Hãy đếm xem trong dãy có bao nhiêu số là Số phong phú.
+
+\textbf{Dữ liệu vào (File: RICHNUM.INP):}
+\begin{itemize}
+    \item Dòng đầu tiên chứa số nguyên $N$ ($1 \le N \le 10^5$).
+    \item Dòng thứ hai chứa $N$ số nguyên $A_1, A_2, \dots, A_N$ ($1 \le A_i \le 10^5$).
+\end{itemize}
+
+\textbf{Kết quả (File: RICHNUM.OUT):}
+\begin{itemize}
+    \item Ghi ra số lượng Số phong phú tìm được trong dãy.
+\end{itemize}
+
+\textbf{Ví dụ:}
+\iobox{
+5 \newline
+12 10 18 20 7
+}{
+3
+}
+\textit{Giải thích: Các số phong phú là 12, 18, 20.
+- 10: 1+2+5=8 < 10 (Không phải).
+- 18: 1+2+3+6+9=21 > 18 (Phải).
+- 7: 1 < 7 (Không phải).}
+
+% --- BÀI 2 ---
+\bai{2}{Nén Xâu Ký Tự (6.0 điểm)}
+
+Để tiết kiệm dung lượng lưu trữ, người ta sử dụng phương pháp nén xâu RLE (Run-Length Encoding) cho các xâu ký tự chỉ chứa chữ cái in hoa. Quy tắc nén như sau: Nếu có $K$ ký tự giống nhau liên tiếp ($K \ge 1$), ta sẽ thay thế dãy đó bằng số nguyên $K$ theo sau là ký tự đó.
+Ví dụ: Xâu \texttt{AAABBCCCCA} sẽ được nén thành \texttt{3A2B4C1A}.
+
+\textbf{Yêu cầu:} Cho một xâu ký tự $S$. Hãy in ra xâu nén của nó theo quy tắc trên.
+
+\textbf{Dữ liệu vào (File: STRZIP.INP):}
+\begin{itemize}
+    \item Một dòng duy nhất chứa xâu $S$ gồm các chữ cái in hoa (độ dài không quá $10^5$).
+\end{itemize}
+
+\textbf{Kết quả (File: STRZIP.OUT):}
+\begin{itemize}
+    \item Ghi ra xâu sau khi đã nén.
+\end{itemize}
+
+\textbf{Ví dụ:}
+\iobox{
+AAABBC
+}{
+3A2B1C
+}
+\textit{Giải thích: 3 chữ A liên tiếp $\to$ 3A, 2 chữ B liên tiếp $\to$ 2B, 1 chữ C $\to$ 1C.}
+
+\newpage
+
+% --- BÀI 3 ---
+\bai{3}{Vùng Ảnh Liên Thông (6.0 điểm)}
+
+Một bức ảnh đen trắng được biểu diễn bởi ma trận kích thước $M \times N$ gồm các số 0 (màu trắng) và 1 (màu đen). Một "vùng ảnh" là tập hợp các ô màu đen (số 1) liên thông với nhau (kề nhau theo cạnh trái, phải, trên, dưới).
+
+\textbf{Yêu cầu:} Hãy đếm số lượng vùng ảnh (số lượng vùng liên thông các số 1) có trong ma trận và xác định diện tích (số ô) của vùng ảnh lớn nhất.
+
+\textbf{Dữ liệu vào (File: IMAGE.INP):}
+\begin{itemize}
+    \item Dòng đầu tiên chứa hai số nguyên $M, N$ ($1 \le M, N \le 1000$).
+    \item $M$ dòng tiếp theo, mỗi dòng chứa $N$ số nguyên (0 hoặc 1).
+\end{itemize}
+
+\textbf{Kết quả (File: IMAGE.OUT):}
+\begin{itemize}
+    \item Dòng 1: Ghi số lượng vùng ảnh.
+    \item Dòng 2: Ghi diện tích của vùng ảnh lớn nhất (nếu không có số 1 nào thì ghi 0).
+\end{itemize}
+
+\textbf{Ví dụ:}
+\iobox{
+5 6 \newline
+1 1 0 0 0 1 \newline
+1 0 0 1 1 1 \newline
+0 0 0 1 0 0 \newline
+1 1 0 1 0 1 \newline
+1 1 0 0 0 1
+}{
+4 \newline
+6
+}
+\textit{Giải thích:
+- Vùng 1: Góc trên trái (3 ô).
+- Vùng 2: Góc trên phải và giữa (6 ô) - Đây là vùng lớn nhất.
+- Vùng 3: Góc dưới trái (4 ô).
+- Vùng 4: Góc dưới phải (2 ô đơn lẻ nối nhau? Không, ô (4,6) và (5,6) là 2 ô dọc. Ô (1,6)-(2,6) là vùng 2. Vùng 4 là (4,6)-(5,6)).
+Tổng cộng 4 vùng.}
+
+% --- BÀI 4 ---
+\bai{4}{Chọn Quà Lưu Niệm (3.0 điểm)}
+
+Trong chuyến tham quan Lạng Sơn, An ghé vào một cửa hàng lưu niệm. Cửa hàng có $N$ món đồ, món thứ $i$ có giá tiền là $W_i$ và độ yêu thích là $V_i$. An mang theo số tiền tối đa là $T$. An muốn chọn mua một số món đồ sao cho tổng giá tiền không vượt quá $T$ và tổng độ yêu thích là lớn nhất có thể. Mỗi món đồ chỉ được mua tối đa 1 lần.
+
+\textbf{Yêu cầu:} Hãy tính tổng độ yêu thích lớn nhất mà An có thể đạt được.
+
+\textbf{Dữ liệu vào (File: GIFT.INP):}
+\begin{itemize}
+    \item Dòng đầu chứa hai số nguyên $N$ và $T$ ($1 \le N \le 20$, $1 \le T \le 10^9$).
+    \item $N$ dòng tiếp theo, mỗi dòng chứa hai số nguyên $W_i, V_i$ ($1 \le W_i, V_i \le 10^6$).
+\end{itemize}
+
+\textbf{Kết quả (File: GIFT.OUT):}
+\begin{itemize}
+    \item Ghi ra tổng độ yêu thích lớn nhất tìm được.
+\end{itemize}
+
+\textbf{Ví dụ:}
+\iobox{
+4 10 \newline
+4 4 \newline
+3 3 \newline
+5 6 \newline
+2 1
+}{
+10
+}
+\textit{Giải thích: Chọn món thứ 1 (giá 4, thích 4) và món thứ 3 (giá 5, thích 6). Tổng tiền: $4+5=9 \le 10$. Tổng độ thích: $4+6=10$.
+(Lưu ý: Với $N \le 20$, học sinh có thể sử dụng phương pháp Quay lui/Vét cạn. Nếu $N$ lớn hơn cần dùng Quy hoạch động, nhưng ở mức độ đại trà $N$ thường nhỏ để kiểm tra kỹ năng đệ quy/duyệt nhị phân).}
+
+\vspace{1cm}
+\begin{center}
+    \textbf{---------------- HẾT ----------------} \\
+    \textit{Thí sinh không được sử dụng tài liệu. Cán bộ coi thi không giải thích gì thêm.}
+\end{center}
+
+\end{document}

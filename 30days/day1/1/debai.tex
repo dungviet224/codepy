@@ -1,0 +1,195 @@
+% !TeX program = xelatex
+\documentclass[11pt, a4paper]{article}
+
+% --- CẤU HÌNH NGÔN NGỮ & FONT (QUAN TRỌNG) ---
+\usepackage[vietnamese, provide=*]{babel}
+\usepackage{fontspec}
+
+% Cấu hình font chuẩn cho máy Windows (Thay Noto Sans bằng Times New Roman)
+\babelfont{rm}{Times New Roman} 
+\babelfont{sf}{Arial}           
+
+% --- CÁC GÓI CẦN THIẾT ---
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{array}
+\usepackage{enumitem}
+
+% --- CẤU HÌNH TRANG ---
+\setlist[itemize]{label=-} % Đổi dấu chấm tròn thành gạch đầu dòng
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{Trang \thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+
+% --- LỆNH TỰ TẠO (MACROS) ---
+\newcommand{\bai}[2]{\vspace{0.5cm}\noindent\textbf{\large Bài #1: #2}}
+
+\newcommand{\iobox}[2]{
+    \begin{center}
+    \begin{tabularx}{0.9\textwidth}{|X|X|}
+    \hline
+    \textbf{Input} & \textbf{Output} \\
+    \hline
+    \vtop{#1} & \vtop{#2} \\
+    \hline
+    \end{tabularx}
+    \end{center}
+}
+
+% --- BẮT ĐẦU VĂN BẢN ---
+\begin{document}
+
+% --- HEADER ĐỀ THI ---
+\begin{center}
+    \begin{tabular}{>{\centering\arraybackslash}p{0.4\textwidth} >{\centering\arraybackslash}p{0.5\textwidth}}
+        SỞ GIÁO DỤC VÀ ĐÀO TẠO & \textbf{KỲ THI CHỌN HỌC SINH GIỎI CẤP TỈNH} \\
+        TỈNH BÌNH MINH & \textbf{LỚP 11 THPT NĂM HỌC 2025 - 2026} \\
+        \textbf{ĐỀ THI CHÍNH THỨC} & Môn thi: \textbf{TIN HỌC} \\
+        (Đề thi có 02 trang) & Ngày thi: \textbf{30/01/2026} \\
+         & Thời gian làm bài: \textbf{180 phút} (không kể thời gian giao đề)
+    \end{tabular}
+\end{center}
+\hrule
+\vspace{0.3cm}
+
+\textbf{Tổng quan đề thi:}
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Tên bài} & \textbf{File bài làm} & \textbf{Input} & \textbf{Output} \\ \hline
+Bài 1: Số nguyên tố đặc biệt & PRIME.PY / .CPP & PRIME.INP & PRIME.OUT \\ \hline
+Bài 2: Tổng bằng K & SUMK.PY / .CPP & SUMK.INP & SUMK.OUT \\ \hline
+Bài 3: Đường đi an toàn & SAFE.PY / .CPP & SAFE.INP & SAFE.OUT \\ \hline
+Bài 4: Trạm phát sóng & WIFI.PY / .CPP & WIFI.INP & WIFI.OUT \\ \hline
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+
+% --- BÀI 1 ---
+\bai{1}{Số nguyên tố đặc biệt (5.0 điểm)}
+
+Trong tiết học Toán, thầy giáo giới thiệu về khái niệm "Số nguyên tố đặc biệt". Một số nguyên dương $X$ được gọi là số nguyên tố đặc biệt nếu $X$ là số nguyên tố và tổng các chữ số của $X$ cũng là một số nguyên tố.
+
+\textbf{Yêu cầu:} Cho hai số nguyên dương $L$ và $R$. Hãy đếm xem có bao nhiêu số nguyên tố đặc biệt trong đoạn $[L, R]$.
+
+\textbf{Dữ liệu vào:}
+\begin{itemize}
+    \item Một dòng duy nhất chứa hai số nguyên $L, R$ ($1 \le L \le R \le 10^6$).
+\end{itemize}
+
+\textbf{Kết quả:}
+\begin{itemize}
+    \item Ghi ra một số nguyên duy nhất là số lượng số nguyên tố đặc biệt tìm được.
+\end{itemize}
+
+\textbf{Ví dụ:}
+\iobox{
+1 20
+}{
+5
+}
+\textit{Giải thích: Các số nguyên tố trong đoạn [1, 20]: 2, 3, 5, 7, 11, 13, 17, 19. \\
+Tổng chữ số tương ứng: 2, 3, 5, 7, 2, 4, 8, 10. \\
+Các tổng là số nguyên tố: 2, 3, 5, 7, 2. \\
+Vậy các số thỏa mãn là: 2, 3, 5, 7, 11 (Tổng cộng 5 số).}
+
+% --- BÀI 2 ---
+\bai{2}{Tổng bằng K (5.0 điểm)}
+
+Cho một dãy gồm $N$ số nguyên dương $A_1, A_2, \dots, A_N$ và một số nguyên dương $K$. Hãy đếm số cặp chỉ số $(i, j)$ sao cho $1 \le i < j \le N$ và $A_i + A_j = K$.
+
+\textbf{Dữ liệu vào:}
+\begin{itemize}
+    \item Dòng đầu tiên chứa hai số nguyên $N$ và $K$ ($1 \le N \le 10^5, 1 \le K \le 2 \cdot 10^9$).
+    \item Dòng thứ hai chứa $N$ số nguyên dương $A_1, A_2, \dots, A_N$ ($1 \le A_i \le 10^9$).
+\end{itemize}
+
+\textbf{Kết quả:}
+\begin{itemize}
+    \item Ghi ra số lượng cặp $(i, j)$ thỏa mãn điều kiện đề bài.
+\end{itemize}
+
+\textbf{Ví dụ:}
+\iobox{
+5 6 \newline
+1 5 3 3 5
+}{
+2
+}
+\textit{Giải thích: Có 2 cặp thỏa mãn là $(A_1, A_2) \to 1+5=6$ và $(A_3, A_4) \to 3+3=6$.}
+
+\vspace{0.5cm} 
+% --- BÀI 3 ---
+\bai{3}{Đường đi an toàn (5.0 điểm)}
+
+Một nhà thám hiểm cần đi qua một lưới ô vuông kích thước $M \times N$. Các hàng được đánh số từ 1 đến $M$, các cột được đánh số từ 1 đến $N$. Ô nằm ở hàng $i$, cột $j$ có chứa một số lượng vàng là $C_{ij}$. Nhà thám hiểm xuất phát từ ô $(1, 1)$ và cần đi đến ô $(M, N)$. Tại mỗi bước, từ ô $(i, j)$, người đó chỉ có thể di chuyển sang ô $(i+1, j)$ (xuống dưới) hoặc $(i, j+1)$ (sang phải).
+
+\textbf{Yêu cầu:} Hãy tìm đường đi sao cho tổng lượng vàng thu được trên đường đi là lớn nhất.
+
+\textbf{Dữ liệu vào:}
+\begin{itemize}
+    \item Dòng đầu chứa hai số nguyên $M, N$ ($1 \le M, N \le 1000$).
+    \item $M$ dòng tiếp theo, mỗi dòng chứa $N$ số nguyên dương $C_{ij}$ ($0 \le C_{ij} \le 1000$).
+\end{itemize}
+
+\textbf{Kết quả:}
+\begin{itemize}
+    \item Ghi ra một số nguyên duy nhất là tổng lượng vàng lớn nhất thu được.
+\end{itemize}
+
+\textbf{Ví dụ:}
+\iobox{
+3 3 \newline
+1 2 5 \newline
+3 4 1 \newline
+1 8 9
+}{
+25
+}
+\textit{Giải thích: Đường đi tối ưu nhất: $1 \to 3 \to 4 \to 8 \to 9$. Tổng = $1+3+4+8+9 = 25$.}
+
+\newpage
+
+% --- BÀI 4 ---
+\bai{4}{Trạm phát sóng (5.0 điểm)}
+
+Thành phố X có $N$ ngôi nhà, được đánh số từ 1 đến $N$, kết nối với nhau bởi $M$ con đường hai chiều. Con đường thứ $i$ nối ngôi nhà $u_i$ và $v_i$ với độ dài $w_i$. Để đảm bảo phủ sóng Wifi cho toàn thành phố, chính quyền muốn đặt một trạm phát sóng chính tại ngôi nhà số 1.
+
+\textbf{Yêu cầu:} Hãy xác định khoảng cách ngắn nhất từ ngôi nhà số 1 đến tất cả các ngôi nhà còn lại trong thành phố. Nếu không có đường đi đến một ngôi nhà nào đó, hãy ghi -1.
+
+\textbf{Dữ liệu vào:}
+\begin{itemize}
+    \item Dòng đầu tiên chứa hai số nguyên $N$ và $M$ ($1 \le N \le 10^5, 1 \le M \le 2 \cdot 10^5$).
+    \item $M$ dòng tiếp theo, mỗi dòng chứa ba số nguyên $u, v, w$ mô tả một con đường nối $u$ và $v$ có độ dài $w$ ($1 \le w \le 10^9$).
+\end{itemize}
+
+\textbf{Kết quả:}
+\begin{itemize}
+    \item Ghi ra $N$ số nguyên trên một dòng. Số thứ $i$ là khoảng cách ngắn nhất từ nhà số 1 đến nhà số $i$.
+\end{itemize}
+  
+\textbf{Ví dụ: }
+\iobox{
+4 4 \newline
+1 2 4 \newline
+1 3 1 \newline
+3 2 2 \newline
+3 4 5
+}{
+0 3 1 6
+}
+
+\vspace{1cm}
+\begin{center}
+    \textbf{---------------- HẾT ----------------} \\
+    \textit{Thí sinh không được sử dụng tài liệu. Cán bộ coi thi không giải thích gì thêm.}
+\end{center}
+
+\end{document}

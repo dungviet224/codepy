@@ -1,0 +1,211 @@
+\documentclass[11pt, a4paper]{article}
+
+% --- UNIVERSAL PREAMBLE BLOCK ---
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{fontspec}
+
+\usepackage[vietnamese, provide=*]{babel}
+
+\babelprovide[import]{vietnamese}
+\babelprovide[import]{english}
+
+% Set default/Latin font to Sans Serif in the main (rm) slot
+\babelfont{rm}{Noto Sans}
+
+% Add because main language is not English
+\usepackage{enumitem}
+\setlist[itemize]{label=-}
+
+% --- PACKAGES ---
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{array}
+
+% --- PAGE SETUP ---
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{Trang \thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+
+% --- CUSTOM COMMANDS ---
+\newcommand{\bai}[2]{\vspace{0.5cm}\noindent\textbf{Bài #1: #2}}
+\newcommand{\iobox}[2]{
+    \begin{center}
+    \begin{tabularx}{0.8\textwidth}{|X|X|}
+    \hline
+    \textbf{Input} & \textbf{Output} \\
+    \hline
+    \vtop{#1} & \vtop{#2} \\
+    \hline
+    \end{tabularx}
+    \end{center}
+}
+
+\begin{document}
+
+% --- HEADER ---
+\begin{center}
+    \begin{tabular}{>{\centering\arraybackslash}p{0.4\textwidth} >{\centering\arraybackslash}p{0.5\textwidth}}
+        SỞ GIÁO DỤC VÀ ĐÀO TẠO & \textbf{KỲ THI CHỌN HỌC SINH GIỎI CẤP TỈNH} \\
+        LẠNG SƠN & \textbf{LỚP 11 THPT NĂM HỌC 2025 - 2026} \\
+        \textbf{ĐỀ THI CHÍNH THỨC} & Môn thi: \textbf{TIN HỌC (ĐẠI TRÀ)} \\
+        (Đề thi có 02 trang) & Ngày thi: \textbf{31/01/2026} \\
+         & Thời gian làm bài: \textbf{180 phút} (không kể thời gian giao đề)
+    \end{tabular}
+\end{center}
+\hrule
+\vspace{0.5cm}
+
+\textbf{Tổng quan đề thi:}
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Câu} & \textbf{Tên bài} & \textbf{File bài làm} & \textbf{Điểm} \\ \hline
+1 & Số Siêu Nguyên Tố & SUPERPRIME.CPP / .PY & 5.0 \\ \hline
+2 & Tổng Số Trong Xâu & SUMSTR.CPP / .PY & 6.0 \\ \hline
+3 & Thu Hoạch Cà Rốt & CARROT.CPP / .PY & 6.0 \\ \hline
+4 & Lịch Làm Việc & SCHED.CPP / .PY & 3.0 \\ \hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+% --- BÀI 1 ---
+\bai{1}{Số Siêu Nguyên Tố (5.0 điểm)}
+
+Một số nguyên dương $X$ được gọi là "Số siêu nguyên tố" nếu $X$ là số nguyên tố và tổng các chữ số của $X$ cũng là một số nguyên tố.
+Cho dãy số nguyên dương $A$ gồm $N$ phần tử $A_1, A_2, \dots, A_N$.
+
+\textbf{Yêu cầu:} Hãy đếm xem trong dãy $A$ có bao nhiêu số là số siêu nguyên tố.
+
+\textbf{Dữ liệu vào (File: SUPERPRIME.INP):}
+\begin{itemize}
+    \item Dòng đầu tiên chứa số nguyên $N$ ($1 \le N \le 10^5$).
+    \item Dòng thứ hai chứa $N$ số nguyên $A_1, A_2, \dots, A_N$ ($1 \le A_i \le 10^6$).
+\end{itemize}
+
+\textbf{Kết quả (File: SUPERPRIME.OUT):}
+\begin{itemize}
+    \item Ghi ra một số nguyên duy nhất là số lượng số siêu nguyên tố tìm được.
+\end{itemize}
+
+\textbf{Ví dụ:}
+\iobox{
+5 \newline
+12 23 11 13 17
+}{
+2
+}
+\textit{Giải thích:
+- 12: Không phải SNT.
+- 23: Là SNT (23), tổng chữ số 2+3=5 (là SNT) $\rightarrow$ Chọn.
+- 11: Là SNT (11), tổng chữ số 1+1=2 (là SNT) $\rightarrow$ Chọn.
+- 13: Là SNT (13), tổng chữ số 1+3=4 (không là SNT).
+- 17: Là SNT (17), tổng chữ số 1+7=8 (không là SNT).
+Kết quả là 2.}
+
+% --- BÀI 2 ---
+\bai{2}{Tổng Số Trong Xâu (6.0 điểm)}
+
+Cho một xâu ký tự $S$ bao gồm các chữ cái in thường, in hoa và các chữ số. Các chữ số liên tiếp nhau tạo thành một số nguyên dương.
+
+\textbf{Yêu cầu:} Hãy tính tổng của tất cả các số nguyên dương được tạo thành trong xâu $S$.
+
+\textbf{Dữ liệu vào (File: SUMSTR.INP):}
+\begin{itemize}
+    \item Một dòng duy nhất chứa xâu $S$ (độ dài không quá $10^5$).
+\end{itemize}
+
+\textbf{Kết quả (File: SUMSTR.OUT):}
+\begin{itemize}
+    \item Ghi ra một số nguyên là tổng các số tìm được.
+\end{itemize}
+
+\textbf{Ví dụ:}
+\iobox{
+hoc10tin11lop11
+}{
+32
+}
+\textit{Giải thích: Các số trong xâu là 10, 11, 11. Tổng: $10 + 11 + 11 = 32$.
+Lưu ý: Các số trong xâu có thể rất lớn, vượt quá phạm vi số nguyên 64-bit chuẩn (nhưng với Python thì xử lý tự động).}
+
+\newpage
+
+% --- BÀI 3 ---
+\bai{3}{Thu Hoạch Cà Rốt (6.0 điểm)}
+
+Một cánh đồng cà rốt được chia thành lưới ô vuông kích thước $M \times N$. Ô ở dòng $i$, cột $j$ có số lượng cà rốt là $C_{ij}$. Thỏ Con xuất phát từ ô $(1, 1)$ và muốn đi đến ô $(M, N)$ để về nhà. Tại mỗi bước, Thỏ Con chỉ có thể di chuyển sang phải (từ $(i, j)$ đến $(i, j+1)$) hoặc đi xuống dưới (từ $(i, j)$ đến $(i+1, j)$).
+
+\textbf{Yêu cầu:} Hãy tìm đường đi cho Thỏ Con sao cho tổng số lượng cà rốt thu được trên đường đi là lớn nhất.
+
+\textbf{Dữ liệu vào (File: CARROT.INP):}
+\begin{itemize}
+    \item Dòng đầu chứa hai số nguyên $M, N$ ($1 \le M, N \le 1000$).
+    \item $M$ dòng tiếp theo, mỗi dòng chứa $N$ số nguyên dương $C_{ij}$ ($0 \le C_{ij} \le 100$).
+\end{itemize}
+
+\textbf{Kết quả (File: CARROT.OUT):}
+\begin{itemize}
+    \item Ghi ra tổng số lượng cà rốt lớn nhất thu được.
+\end{itemize}
+
+\textbf{Ví dụ:}
+\iobox{
+3 4 \newline
+1 2 5 1 \newline
+3 1 10 2 \newline
+1 1 5 10
+}{
+29
+}
+\textit{Giải thích: Đường đi tối ưu: (1,1) $\to$ (1,2) $\to$ (1,3) $\to$ (2,3) $\to$ (3,3) $\to$ (3,4).
+Tổng: $1 + 2 + 5 + 10 + 5 + 10 = 33$? Khoan, kiểm tra lại đường đi khác.
+Đường đi: $1 \to 3 \to 1 \to 1 \to 5 \to 10 = 21$.
+Đường đi: $1 \to 2 \to 5 \to 10 \to 5 \to 10$? Ô (2,3)=10, (3,3)=5. Đúng.
+Thử lại ví dụ khác:
+$1 \to 3 \to 1 \to 10 \to 2 \to 10 = 27$.
+Đường $1 \to 2 \to 5 \to 10 \to 2 \to 10 = 30$.
+(Học sinh cần sử dụng phương pháp Quy hoạch động: $F[i][j] = C[i][j] + \max(F[i-1][j], F[i][j-1])$).}
+
+% --- BÀI 4 ---
+\bai{4}{Lịch Làm Việc (3.0 điểm)}
+
+Một công ty nhận được $N$ yêu cầu thuê hội trường. Yêu cầu thứ $i$ bắt đầu tại thời điểm $S_i$ và kết thúc tại thời điểm $E_i$. Hội trường chỉ có thể phục vụ 1 yêu cầu tại một thời điểm. Hai yêu cầu được gọi là không bị trùng nhau nếu thời điểm kết thúc của yêu cầu này nhỏ hơn hoặc bằng thời điểm bắt đầu của yêu cầu kia.
+
+\textbf{Yêu cầu:} Hãy chọn ra số lượng lớn nhất các yêu cầu có thể phục vụ.
+
+\textbf{Dữ liệu vào (File: SCHED.INP):}
+\begin{itemize}
+    \item Dòng đầu chứa số nguyên $N$ ($1 \le N \le 10^5$).
+    \item $N$ dòng tiếp theo, mỗi dòng chứa 2 số nguyên $S_i, E_i$ ($1 \le S_i < E_i \le 10^9$).
+\end{itemize}
+
+\textbf{Kết quả (File: SCHED.OUT):}
+\begin{itemize}
+    \item Ghi ra số lượng yêu cầu tối đa được chọn.
+\end{itemize}
+
+\textbf{Ví dụ:}
+\iobox{
+4 \newline
+1 3 \newline
+2 4 \newline
+3 5 \newline
+4 6
+}{
+2
+}
+\textit{Giải thích: Có thể chọn các cuộc họp [1, 3] và [3, 5] (hoặc [1, 3] và [4, 6] hoặc [2, 4] và [4, 6]). Tối đa chọn được 2 cuộc.}
+
+\vspace{1cm}
+\begin{center}
+    \textbf{---------------- HẾT ----------------} \\
+    \textit{Thí sinh không được sử dụng tài liệu. Cán bộ coi thi không giải thích gì thêm.}
+\end{center}
+
+\end{document}

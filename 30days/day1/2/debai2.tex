@@ -1,0 +1,229 @@
+% !TeX program = xelatex
+\documentclass[11pt, a4paper]{article}
+
+% --- CẤU HÌNH NGÔN NGỮ & FONT ---
+\usepackage[vietnamese, provide=*]{babel}
+\usepackage{fontspec}
+
+% Cấu hình font chuẩn cho máy Windows
+\babelfont{rm}{Times New Roman} 
+\babelfont{sf}{Arial}           
+
+% --- CÁC GÓI CẦN THIẾT ---
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{array}
+\usepackage{enumitem}
+
+% --- CẤU HÌNH TRANG & ĐỊNH DẠNG ---
+\setlist[itemize]{label=-, noitemsep, topsep=0pt} % Gạch đầu dòng, gọn dòng
+\setlength{\parindent}{0pt} % Không thụt đầu dòng
+\setlength{\parskip}{6pt}   % Khoảng cách giữa các đoạn
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{Trang \thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+
+% Định nghĩa cột C cho tabularx để canh giữa
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\begin{document}
+
+\begin{center}
+    \textbf{\Large ĐỀ THI LẬP TRÌNH THI ĐẤU} \\
+    \textit{Thời gian làm bài: 180 phút}
+\end{center}
+\hrule
+\vspace{0.5cm}
+
+% ----------------------------------------------------------------------
+\section*{Bài 1: Số Đẹp (5 điểm)}
+
+\textbf{Đề bài:}
+Một số nguyên dương được gọi là \textbf{số đẹp} nếu như nó chia hết cho 5 và tổng các chữ số của nó cũng chia hết cho 5.
+
+\textbf{Yêu cầu:} Cho dãy $n$ số nguyên dương $a_{1},a_{2},...,a_{n}$. Hãy đếm xem có bao nhiêu số đẹp trong dãy trên.
+
+\textbf{Dữ liệu (Input):}
+\begin{itemize}
+    \item Dòng đầu chứa số nguyên dương $n$.
+    \item Tiếp theo là $n$ dòng, dòng thứ $i$ ($i=1,2,...,n$) chứa số nguyên dương $a_{i}$.
+    \item Tổng số lượng các chữ số của $a_{1},a_{2},...,a_{n}$ không vượt quá $10^{6}$.
+\end{itemize}
+
+\textbf{Kết quả (Output):} In ra màn hình một số nguyên duy nhất là số lượng số đẹp trong dãy số đã cho.
+
+\textbf{Ví dụ:}
+\begin{center}
+    \begin{tabularx}{0.9\textwidth}{|p{5cm}|X|X|}
+        \hline
+        \textbf{Dữ liệu} & \textbf{Kết quả} & \textbf{Giải thích} \\
+        \hline
+        5 \newline 15 \newline 50 \newline 140 \newline 25 \newline 10 & 
+        2 & 
+        Chỉ có 2 số \textbf{50}, \textbf{140} thoả mãn đồng thời hai điều kiện: chia hết cho 5 và tổng các chữ số cũng chia hết cho 5. \\
+        \hline
+    \end{tabularx}
+\end{center}
+
+\textbf{Ràng buộc:}
+\begin{itemize}
+    \item Có 80\% số tests ứng với 80\% số điểm của bài thoả mãn $a_{i} \le 10^9$ $\forall i=1,2,...,n$.
+    \item Các tests còn lại không có ràng buộc bổ sung.
+\end{itemize}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+% ----------------------------------------------------------------------
+\section*{Bài 2: Tổng đoạn con liên tiếp lớn nhất (5 điểm)}
+
+\textbf{Đề bài:}
+Cho dãy $n$ số nguyên $a_{1},a_{2},...,a_{n}$. Một dãy con liên tiếp của dãy trên là một bộ các phần tử đứng kề nhau trong dãy, có dạng $a_{i},a_{i+1},...,a_{j}$ với $1 \le i \le j \le n$. Hãy tìm tổng lớn nhất trong tất cả các dãy con liên tiếp của dãy đã cho.
+
+\textbf{Dữ liệu (Input):}
+\begin{itemize}
+    \item Dòng đầu chứa số nguyên dương $n$ $(n \le 10^{6})$.
+    \item Dòng thứ hai chứa $n$ số nguyên lần lượt là $a_{1},a_{2},...,a_{n}$ ($|a_i| \le 10^9$).
+\end{itemize}
+
+\textbf{Kết quả (Output):} Ghi ra màn hình một số nguyên duy nhất là giá trị tổng lớn nhất tìm được.
+
+\textbf{Ví dụ:}
+\begin{center}
+    \begin{tabularx}{0.6\textwidth}{|X|Y|}
+        \hline
+        \textbf{Dữ liệu} & \textbf{Kết quả} \\
+        \hline
+        5 \newline 2 -1 5 -3 4 & 7 \\
+        \hline
+    \end{tabularx}
+\end{center}
+
+\textbf{Ràng buộc:}
+\begin{itemize}
+    \item 40\% số tests: $n \le 500$.
+    \item 20\% số tests tiếp theo: $n \le 5000$.
+    \item Các tests còn lại: $n \le 10^{6}$.
+\end{itemize}
+
+\newpage
+
+% ----------------------------------------------------------------------
+\section*{Bài 3: Đếm cặp (6 điểm)}
+
+\textbf{Đề bài:}
+Cho dãy $n$ số nguyên $a_{1},a_{2},...,a_{n}$ và số nguyên dương $M$. Hãy đếm số lượng cặp $(i,j)$ với $1 \le i < j \le n$ sao cho $a_{i}+a_{j}$ chia hết cho $M$.
+
+\textbf{Dữ liệu (Input):}
+\begin{itemize}
+    \item Dòng đầu chứa hai số nguyên dương $n, M$ $(n \le 3 \times 10^{5}, M \le 10^{18})$.
+    \item Dòng thứ hai chứa $n$ số nguyên $a_{1},a_{2},...,a_{n}$ $(|a_{i}| \le 10^{18})$.
+\end{itemize}
+
+\textbf{Kết quả (Output):} Ghi ra màn hình một số nguyên duy nhất là số cặp tìm được.
+
+\textbf{Ví dụ:}
+\begin{center}
+    \begin{tabularx}{0.9\textwidth}{|p{5cm}|X|X|}
+        \hline
+        \textbf{Dữ liệu} & \textbf{Kết quả} & \textbf{Giải thích} \\
+        \hline
+        5 4 \newline 1 3 2 6 2 & 4 & Các cặp $(i,j)$ là: (1,2), (3,4), (3,5), (4,5). \\
+        \hline
+    \end{tabularx}
+\end{center}
+
+\textbf{Ràng buộc:}
+\begin{itemize}
+    \item 40\% số tests: $n \le 5000$.
+    \item 20\% số tests tiếp theo: $M \le 10^{6}$.
+    \item Các tests còn lại không có ràng buộc bổ sung.
+\end{itemize}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+% ----------------------------------------------------------------------
+\section*{Bài 4: Chọn hoa (6 điểm)}
+
+\textbf{Đề bài:}
+Cho $n$ bông hoa có độ đẹp lần lượt là $a_{1},a_{2},...,a_{n}$ và một số nguyên $K$. Bạn cần chọn ra hai tập hợp bông hoa (gọi là hai bó hoa) sao cho mỗi bông hoa chỉ thuộc tối đa một bó.
+
+Điều kiện của mỗi bó hoa là chênh lệch giữa độ đẹp của bông hoa lớn nhất và nhỏ nhất trong bó đó không được vượt quá $K$. Hãy tìm tổng số lượng bông hoa lớn nhất có thể chọn được cho cả hai bó hoa.
+
+\textbf{Dữ liệu (Input):}
+\begin{itemize}
+    \item Dòng đầu chứa hai số nguyên dương $n$ và $K$ $(n \le 10^{6}, K \le 10^{9})$.
+    \item Dòng thứ hai chứa $n$ số nguyên $a_{1},a_{2},...,a_{n}$ $(1 \le a_{i} \le 10^{9})$.
+\end{itemize}
+
+\textbf{Kết quả (Output):} Ghi ra màn hình một số nguyên duy nhất là tổng số lượng bông hoa lớn nhất tìm được.
+
+\textbf{Ví dụ:}
+\begin{center}
+    \begin{tabularx}{0.9\textwidth}{|p{5cm}|X|X|}
+        \hline
+        \textbf{Dữ liệu} & \textbf{Kết quả} & \textbf{Giải thích} \\
+        \hline
+        6 3 \newline 1 10 2 7 12 4 & 5 & Bó 1: $\{1,2,4\}$ (chênh lệch $4-1=3 \le 3$). \newline Bó 2: $\{10, 12\}$ hoặc $\{7, 10\}$. \newline Tổng là $3+2=5$. \\
+        \hline
+    \end{tabularx}
+\end{center}
+
+\textbf{Ràng buộc:}
+\begin{itemize}
+    \item Subtask 1 (40\% số điểm): $n \le 10$.
+    \item Subtask 2 (20\% số điểm): $n \le 100$.
+    \item Subtask 3 (20\% số điểm): $n \le 5000$.
+    \item Subtask 4 (20\% số điểm): $n \le 10^{6}$.
+\end{itemize}
+
+\newpage
+
+% ----------------------------------------------------------------------
+\section*{Bài 5: Tưới cây (8 điểm)}
+
+\textbf{Đề bài:}
+Trường THCS nơi Dũng đang học có trồng một hàng cây xanh gồm $n$ cây được đánh số thứ tự từ 1 đến $n$ (từ trái sang phải). Có thể coi hàng cây như trục tọa độ $Ox$ và cây thứ $i$ có tọa độ $x_{i}$ ($x_{1}<x_{2}<...<x_{n}$).
+
+Để tưới nước, nhà trường lắp đặt $m$ vòi tưới tự động. Vòi thứ $i$ $(i=1..m)$ được lắp tại vị trí cây $t_{i}$, có bán kính tưới là $R_{i}$. Vòi này tưới được cây $t_{i}$ và tất cả các cây có khoảng cách đến $t_{i}$ không vượt quá $R_{i}$.
+
+\textbf{Yêu cầu:} Cho biết vị trí lắp đặt $m$ vòi nước và bán kính tưới nước. Hãy đếm xem có bao nhiêu cây được tưới nước.
+
+\textbf{Dữ liệu (Input):}
+\begin{itemize}
+    \item Dòng đầu tiên chứa hai số nguyên dương $n, m$ $(1 \le m \le n \le 10^{6})$.
+    \item Dòng thứ hai chứa $n$ số nguyên $x_{1},x_{2},...,x_{n}$ ($0 < x_i \le 10^9$) lần lượt là tọa độ của các cây.
+    \item Tiếp theo là $m$ dòng, dòng thứ $i$ chứa hai số nguyên dương $t_{i}, R_{i}$ ($1 \le t_{i} \le n; R_{i} \le 10^{9}$) lần lượt là số hiệu cây đặt vòi và bán kính tưới.
+\end{itemize}
+
+\textbf{Kết quả (Output):} Ghi ra màn hình một số nguyên duy nhất là số cây được tưới nước.
+
+\textbf{Ví dụ:}
+\begin{center}
+    \begin{tabularx}{0.9\textwidth}{|p{5cm}|X|X|}
+        \hline
+        \textbf{Dữ liệu} & \textbf{Kết quả} & \textbf{Giải thích} \\
+        \hline
+        5 2 \newline 1 3 5 7 9 \newline 1 1 \newline 4 2 & 5 & Vòi 1 (tại cây 1, tọa độ 1, BK 1) tưới được cây: 1 (tọa độ 1), 2 (tọa độ 3). \newline Vòi 2 (tại cây 4, tọa độ 7, BK 2) tưới được cây: 3 (tọa độ 5), 4 (tọa độ 7), 5 (tọa độ 9). \newline Tổng: Cả 5 cây đều được tưới. \\
+        \hline
+    \end{tabularx}
+\end{center}
+
+\textbf{Ràng buộc:}
+\begin{itemize}
+    \item 30\% số tests: $m=1$.
+    \item 30\% số tests tiếp theo: $n \le 2000$.
+    \item Các tests còn lại không có giới hạn bổ sung.
+\end{itemize}
+
+\end{document}
